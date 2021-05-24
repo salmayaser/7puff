@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('partials/head.ejs') %>
+
+</head>
+
+<body class="category-page">
+    <!-- mobile menu -->
+    <%- include('partials/mobile-menu.ejs') %>
+
+        <div id="page">
+            <!-- Header -->
+            <%- include('partials/header.ejs') %>
+
+                <!-- end header -->
+
+                <!-- Navigation -->
+
+                <%- include('partials/navbar.ejs') %>
+
+                    <!-- end nav -->
+
+
+                    <!-- Main Container -->
+
+                    <!-- Main Container -->
+
+                    <!-- Main Container End -->
+
+
+                    <!-- Footer -->
+                    <%- include('partials/footer.ejs') %>
+                        <a href="#" class="totop"> </a>
+        </div>
+
+        <!-- End Footer -->
+        <!-- JS -->
+        <%- include('partials/scripts.ejs') %>
+            <script>
+                $(function () {
+
+                    $("form[name='login']").validate({
+                        // Specify validation rules
+                        rules: {
+
+
+                            email: {
+                                required: true,
+                                email: true
+                            },
+
+                            password: {
+                                required: true,
+                                minlength: 5
+                            }
+                        },
+                        // Specify validation error messages
+                        messages: {
+
+                            password: {
+                                required: "<div class=' text-danger'>Please provide a password</div>",
+                                minlength: "<div class=' text-danger'>Your password must be at least 5 characters long</div>"
+                            },
+
+                            email: "<div class='text-danger'>Please enter a valid email address</div>"
+                        },
+                        // Make sure the form is submitted to the destination defined
+                        // in the "action" attribute of the form when valid
+                        submitHandler: function (form) {
+                            form.submit();
+                        }
+                    });
+                });
+            </script>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("partials/dashboard-head.ejs") %>
+        <style>
+            body .img {
+                text-align: center;
+            }
+            body{
+                font-size:20px
+            }
+            .submit{
+                margin-top:20px;
+                padding:7px 20px;
+                background-color:transparent;
+                color:#fff;
+                border: 1px solid #f87311;
+                border-radius: 10px;
+            }
+        </style>
+</head>
+
+<body style="background-color: #000; color: #fff;">
+
+    <div class="container-fluid page-body-wrapper">
+
+        <div class="container mt-5">
+            <section class="main-container container ">
+                <div class="img">
+                    <img src="/images/logo.png" width="300px" style="text-align: center;">
+                </div>
+
+                <form class='container' action="/admin/login" method="POST">
+                    <label class="mt-5">Email</label>
+                    <input type="text" name="email" class="form-control">
+                    <label class="mt-5">Password</label>
+                    <input type="password" name="password" class="form-control">
+                    <input class="submit" type="submit" value="login" class="mt-4">
+                </form>
+            </section>
+
+
+        </div>
+        <!-- main-panel ends -->
+    </div>
+
+</body>
+
+</html>

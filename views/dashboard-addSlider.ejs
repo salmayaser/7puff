@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("partials/dashboard-head.ejs") %>
+</head>
+
+<body>
+    <%- include("partials/dashboard-navbar.ejs") %>
+        <div class="container-fluid page-body-wrapper">
+            <!-- partial:partials/_sidebar.html -->
+            <%- include("partials/dashboard-sidebar.ejs") %>
+                <!-- partial -->
+                <div class="container mt-5">
+                    <h1>Add Slider</h1>
+                    <form action="/admin/addSlider" method="POST" enctype="multipart/form-data">
+                        <div class="form-group mt-3">
+                            <label>Title :</label>
+                            <input type="text" name="title" class="form-control">
+                        </div>
+
+                        <div class="form-group mt-3">
+                            <label> description :</label>
+                            <textarea rows="3" type="text" name="description" class="form-control"></textarea>
+                        </div>
+
+
+                        <div class="form-group mt-3">
+                            <label>Image :</label>
+                            <input type="file" name="image" class="form-control">
+                        </div>
+                        <input type="submit" value="Add Slider" class="btn-dash mb-5">
+
+
+                    </form>
+                    <table class="table table-bordered jtv-cart-summary text-center">
+                        <thead>
+                            <tr>
+                                <th>title</th>
+                                <th>discription</th>
+                                <th>image</th>
+                                <th>#</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(let slider of sliders){ %>
+
+                                <tr>
+
+                                    <td>
+                                        <%=slider.title%>
+                                    </td>
+                                    <td>
+                                        <%=slider.description%>
+                                    </td>
+                                    <td>
+                                        <img width="200px" src="/<%=slider.image%>">
+
+                                    </td>
+                                    <td>
+                                        <form action="/admin/deleteSlider/<%=slider._id%>" method="POST">
+                                            <button type="submit" class="btn btn-danger">delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <%}%>
+                        </tbody>
+
+                    </table>
+                </div>
+
+                <!-- main-panel ends -->
+        </div>
+
+</body>
+
+</html>

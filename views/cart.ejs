@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('partials/head.ejs') %>
+</head>
+
+<body class="shopping-cart-page">
+  <!-- mobile menu -->
+  <%- include('partials/mobile-menu.ejs') %>
+    <div id="page">
+
+
+      <!-- Header -->
+      <%- include('partials/header.ejs') %>
+        <!-- end header -->
+
+        <!-- Navigation -->
+
+        <%- include('partials/navbar.ejs') %>
+          <!-- end nav -->
+
+          <section class="main-container col1-layout">
+            <div class="main container">
+              <div class="col-main">
+                <div class="shopping-cart-inner">
+                  <% if(products.length>0) {%>
+                    <div class="page-title">
+                      <h2>Shopping Cart Summary</h2>
+                    </div>
+
+                    <div class="page-content">
+                      <div class=" table-responsive">
+                        <div class="order-detail-content">
+                          <table class="table table-bordered jtv-cart-summary text-center">
+                            <thead>
+                              <tr>
+                                <th class="cart_product">Product</th>
+                                <th>Description</th>
+                                <th>Avail.</th>
+                                <th>Unit price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th class="action"><i class="fa fa-trash-o"></i></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <% for(let product of products){ totalPrice +=product.productId.price * product.quantity
+                                %>
+
+                                <tr>
+                                  <td class="cart_product"><a href="/product-<%= product.productId._id %>"><img
+                                        class="img-responsive" src="/<%= product.productId.image%>"
+                                        alt="  <%= product.productId.title %>"></a>
+                                  </td>
+                                  <td class="cart_description">
+                                    <p class="product-name"><a href="#">
+                                        <%= product.productId.title %>
+                                      </a></p>
+                                  </td>
+                                  <td class="cart_avail"><span class="label label-success">In stock</span></td>
+                                  <td class="price"><span>
+                                      $<%= product.productId.price %>
+                                    </span></td>
+                                  <td class="qty">
+                                    <%= product.quantity %>
+                                  </td>
+                                  <td class="price"><span>
+                                      $<%= product.productId.price * product.quantity %>
+                                    </span></td>
+                                  <td class="action">
+                                    <form action="/cart/delete/<%=product.productId._id%>" method="POST">
+                                      <button type="submit"><i class="fa fa-times"></i></button>
+                                    </form>
+
+                                  </td>
+                                </tr>
+                                <%}%>
+                            </tbody>
+                            <tfoot>
+                              <tr>
+                                <td colspan="5"><strong>Total</strong></td>
+                                <td colspan="2"><strong>
+                                    $<%=totalPrice%>
+                                  </strong></td>
+                              </tr>
+                            </tfoot>
+                          </table>
+                          <div class="cart_navigation">
+
+
+                            <a class="button btn-proceed-checkout" title="Proceed to Checkout" href="/checkout"
+                              style="font-size: 16px;"><span>Proceed to Checkout</span></a>
+
+
+                            <!-- <button class="button btn-proceed-checkout" title="Proceed to Checkout"
+                              type="submit"><span><a href="/order">Proceed to Checkout</a></span></button> -->
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <%} else{%>
+                      <div class="no-cart">
+                        <h1>No Products In your Cart</h1>
+                      </div>
+                      <%}%>
+                </div>
+                <div class="crosssel mt-5">
+
+
+                </div>
+              </div>
+            </div>
+          </section>
+
+
+          <!-- Footer -->
+          <%- include('partials/footer.ejs') %>
+    </div>
+
+    <!-- End Footer -->
+
+    <%- include('partials/scripts.ejs') %>
+</body>
+
+</html>

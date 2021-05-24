@@ -1,0 +1,156 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('partials/head.ejs') %>
+    <style>
+      .price {
+        color: #f87311;
+      }
+    </style>
+</head>
+
+<body class="category-page">
+  <!-- mobile menu -->
+  <%- include('partials/mobile-menu.ejs') %>
+
+    <div id="page">
+      <!-- Header -->
+      <%- include('partials/header.ejs') %>
+
+        <!-- end header -->
+
+        <!-- Navigation -->
+
+        <%- include('partials/navbar.ejs') %>
+
+          <!-- end nav -->
+          <!-- Main Container -->
+          <section class="main-container col2-right-layout">
+            <div class="main container">
+              <div class="row">
+                <div class="col-main col-sm-12 col-xs-12">
+                  <div class="my-account ">
+                    <div class="page-title ">
+                      <h2>My Account</h2>
+                    </div>
+                    <div class="dashboard">
+                      <div class="welcome-msg">
+                        welcome <%=user.name%>
+
+
+                      </div>
+                      <div class="recent-orders">
+                        <div class="shopping-cart-inner">
+                          <% if(orders.length>0) {%>
+                            <div class="page-title">
+                              <h2>Recent orders</h2>
+                            </div>
+
+                            <div class="page-content">
+                              <div class=" table-responsive">
+                                <div class="order-detail-content">
+                                  <table class="table table-bordered jtv-cart-summary text-center">
+                                    <thead>
+                                      <tr>
+                                        <th class="cart_product">Product</th>
+                                        <th>Description</th>
+                                        <th>Date</th>
+                                        <th>Unit price</th>
+                                        <th>Quantity</th>
+                                        <th>Total</th>
+
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <% for(let order of orders){ %>
+                                        <%for(let product of order.products) { totalPrice +=product.product.price *
+                                          product.quantity%>
+                                          <tr>
+                                            <td class="cart_product"><a href="/product-<%= product._id %>"><img
+                                                  class="img-responsive" src="/<%= product.product.image%>"
+                                                  alt="  <%= product.product.title %>"></a>
+                                            </td>
+                                            <td class="cart_description">
+                                              <p class="product-name"><a href="#">
+                                                  <%= product.product.title %>
+                                                </a></p>
+                                            </td>
+                                            <td class="cart_avail"><span class="label label-success">
+
+                                                <%=order.date%>
+                                              </span>
+                                            </td>
+                                            <td class="price"><span>
+                                                $<%= product.product.price %>
+                                              </span></td>
+                                            <td class="qty">
+                                              <%= product.quantity %>
+                                            </td>
+                                            <td class="price"><span>
+                                                $<%= product.product.price * product.quantity %>
+                                              </span></td>
+
+                                          </tr>
+                                          <%}%>
+                                            <%}%>
+
+                                    </tbody>
+
+                                  </table>
+
+                                </div>
+                              </div>
+                            </div>
+                            <%} else{%>
+                              <div class="no-cart">
+                                <h1>No Orders Yet</h1>
+                              </div>
+                              <%}%>
+                        </div>
+                      </div>
+                      <div class="box-account">
+                        <div class="page-title">
+                          <h2>Account Information</h2>
+                        </div>
+                        <div class="col2-set">
+                          <div class="col-1">
+
+                            <form action='/editAccount/<%=user._id%>' method='POST'>
+                              <input class="form-control" name="name" value="<%=user.name%>" type="text">
+                              <input class="form-control" name="email" value="<%=user.email%>" type="email">
+                              <button
+                                style="border: 2px solid #f87311; color: #f87311; padding: 7px 10px;background-color: transparent; margin: 10px; border-radius: 5px;"
+                                type="submit">Edit</button>
+                            </form>
+                            <a href="/changePassword">Change Password</a>
+
+
+                          </div>
+
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </section>
+
+
+          <!-- Footer -->
+
+          <!-- Footer -->
+          <%- include('partials/footer.ejs') %>
+
+    </div>
+
+    <!-- End Footer -->
+
+    <%- include('partials/scripts.ejs') %>
+
+</body>
+
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('partials/head.ejs') %>
+
+</head>
+
+<body class="category-page">
+    <!-- mobile menu -->
+    <%- include('partials/mobile-menu.ejs') %>
+
+        <div id="page">
+            <!-- Header -->
+            <%- include('partials/header.ejs') %>
+
+                <!-- end header -->
+
+                <!-- Navigation -->
+
+                <%- include('partials/navbar.ejs') %>
+
+                    <!-- end nav -->
+
+
+                    <!-- Main Container -->
+
+                    <!-- Main Container -->
+                    <section class="main-container ">
+                        <div class="main container">
+                            <div class="page-content">
+                                <div class="account-login">
+                                    <div class="col-md-3 col-sm-2"></div>
+                                    <div class="col-md-6 col-sm-8">
+                                        <div class="single-input p-bottom50 clearfix">
+                                            <% if(errorMessage.length>0){%>
+                                                <div class="alert alert-danger text-center">
+                                                    <%=errorMessage %>
+                                                </div>
+                                                <%}%>
+                                                    <form action="/login" method="POST" name="login">
+                                                        <div class="row">
+                                                            <div class="col-xs-12">
+                                                                <div class="check-title">
+                                                                    <h4>Login Now</h4>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="col-xs-12">
+                                                                <label>Email:</label>
+                                                                <div class="input-text">
+                                                                    <input type="email" name="email"
+                                                                        class="form-control" required>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-xs-12">
+                                                                <label>Password:</label>
+                                                                <div class="input-text">
+                                                                    <input type="password" name="password"
+                                                                        class="form-control" required>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="col-xs-12">
+                                                                <div class="billing-checkbox">
+                                                                    <div class="submit-text">
+                                                                        <button class="button" type="submit">
+                                                                            <i class="fa fa-user"></i>&nbsp;
+                                                                            <span>Login</span></button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                    </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- Main Container End -->
+
+
+                    <!-- Footer -->
+                    <%- include('partials/footer.ejs') %>
+                        <a href="#" class="totop"> </a>
+        </div>
+
+        <!-- End Footer -->
+        <!-- JS -->
+        <%- include('partials/scripts.ejs') %>
+            <script>
+                $(function () {
+
+                    $("form[name='login']").validate({
+                        // Specify validation rules
+                        rules: {
+
+
+                            email: {
+                                required: true,
+                                email: true
+                            },
+
+                            password: {
+                                required: true,
+                                minlength: 5
+                            }
+                        },
+                        // Specify validation error messages
+                        messages: {
+
+                            password: {
+                                required: "<div class=' text-danger'>Please provide a password</div>",
+                                minlength: "<div class=' text-danger'>Your password must be at least 5 characters long</div>"
+                            },
+
+                            email: "<div class='text-danger'>Please enter a valid email address</div>"
+                        },
+                        // Make sure the form is submitted to the destination defined
+                        // in the "action" attribute of the form when valid
+                        submitHandler: function (form) {
+                            form.submit();
+                        }
+                    });
+                });
+            </script>
+</body>
+
+</html>

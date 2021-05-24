@@ -1,0 +1,78 @@
+
+.logo .img-responsive{
+    width: 150px;
+}
+.footer .img-responsive{
+    width: 250px;
+    
+}
+.no-cart{
+    margin: 70px 0px;
+    text-align: center;
+    color: #f87311;
+}
+.price-filter{
+    margin-top: 20px;
+    border: 2px solid #f86406;
+    background-color: transparent;
+    border-radius: 10px;
+    padding: 7px 10px ;
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 1px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+.range{
+    margin-top: 10px;
+}
+.info-orther{
+    color: #fff;
+}
+.fa-times{
+    color: #f87311;
+}
+.account-login{
+    color: #fff;
+}
+input[type="text"]{
+    width: 100%;
+}
+input[type="password"]{
+    width: 100%;
+}
+input[type="email"]{
+    width: 100%;
+}
+.billing-checkbox{
+    margin: 20px 0px;
+}
+.shopping-cart-inner .cart_navigation a{
+    border: none;
+    color: #fff;
+}
+.sliders{
+    height: 300px;
+}
+.toolbar{
+    margin-top: 30px;
+}
+.category-description .slider-items-products .owl-buttons a{
+    color: #fff;
+    border: none;
+} 
+footer{
+    margin-top: 100px;
+}
+.my-account{
+    padding: 20px;
+}
+.recent-orders{
+    margin-top: 20px;
+    color: #fff;
+}
+.title-buttons{
+    color: #fff;
+}

@@ -1,0 +1,213 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('partials/head.ejs') %>
+
+</head>
+
+<body class="category-page">
+  <!-- mobile menu -->
+  <%- include('partials/mobile-menu.ejs') %>
+
+    <div id="page">
+      <!-- Header -->
+      <%- include('partials/header.ejs') %>
+
+        <!-- end header -->
+
+        <!-- Navigation -->
+
+        <%- include('partials/navbar.ejs') %>
+
+          <!-- end nav -->
+
+
+          <!-- Main Container -->
+
+          <section class="main-container col2-left-layout">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-8 col-sm-push-4 col-md-9 col-md-push-3">
+                  <div class="category-description std">
+                    <div class="slider-items-products">
+                      <div id="category-desc-slider" class="product-flexslider hidden-buttons">
+                        <div class="slider-items slider-width-col1 owl-carousel owl-Template">
+                          <% for(let slider of sliders){ %>
+                            <!-- Item -->
+                            <div class="item sliders"> <a href="#"><img class="img-responsive img-fluid" alt=""
+                                  src="/<%=slider.image%>"></a>
+                              <div class="cat-img-title cat-bg cat-box">
+                                <h2 class="cat-heading">
+                                  <%=slider.title%>
+                                </h2>
+                                <p>
+                                  <%=slider.description%>
+                                </p>
+                              </div>
+                            </div>
+                            <!-- End Item -->
+                            <%}%>
+
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <article class="col-main">
+
+
+                    <div class="category-products">
+                      <ul class="products-grid">
+                        <%for (let product of products){%>
+                          <li class="item col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                            <div class="item-inner">
+                              <div class="item-img">
+                                <div class="item-img-info"> <a class="product-image" title="<%= product.title%>"
+                                    href="/product-<%= product._id %>"> <img class="img-responsive"
+                                      alt="<%= product.title%>" src="<%= product.image%>"> </a>
+                                </div>
+                              </div>
+                              <div class="item-info">
+                                <div class="info-inner">
+                                  <div class="item-title"> <a title="<%= product.title%>"
+                                      href="/product-<%= product._id %>">
+                                      <%= product.title%>
+                                    </a> </div>
+                                  <div class="item-content">
+
+                                    <div class="item-price">
+                                      <div class="price-box"> <span class="regular-price"> <span class="price"></span>
+                                          $<%= product.price%>
+                                        </span>
+                                        </span> </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                          <%}%>
+                      </ul>
+                    </div>
+                    <!-- <div class="toolbar ">
+                      <div class="row">
+                        <div class="col-sm-6 text-left">
+                          <ul class="pagination">
+                            <li class="active"><span>1</span></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">&gt;</a></li>
+                            <li><a href="#">&gt;|</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div> -->
+                  </article>
+                  <!--	///*///======    End article  ========= //*/// -->
+                </div>
+                <div class="sidebar col-sm-4 col-md-3 col-xs-12 col-md-pull-9 col-sm-pull-8">
+                  <aside class="sidebar">
+                    <div class="block block-layered-nav">
+                      <div class="block-title">Categories</div>
+                      <div class="block-content">
+
+                        <dl id="narrow-by-list">
+                          <dd class="odd">
+                            <ol>
+                              <%for (let category of categories){%>
+                                <li> <a href="/category<%=category._id%>"><span class="price">
+                                      <%=category.title%>
+                                    </span> </a></li>
+                                <%}%>
+                            </ol>
+                          </dd>
+
+
+
+                        </dl>
+                      </div>
+                    </div>
+                    <div class="block product-price-range ">
+                      <div class="block-title">Price</div>
+                      <div class="block-content">
+                        <div class="slider-range">
+                          <div data-role="main" class="ui-content">
+                            <form method="POST" action="/price">
+                              <div data-role="rangeslider">
+                                <input type="range" name="price" id="price-min" value="<%=priceValue%>"
+                                  min="<%=minPrice%>" max="<%=maxPrice%>">
+                                <div class="range">
+                                  Range :<%=minPrice%> - <span id="value"></span>
+                                </div>
+                              </div>
+                              <input type="submit" data-inline="true" value="Filter" class="price-filter">
+
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="block block-cart">
+                      <div class="block-title ">My Cart</div>
+                      <div class="block-content">
+
+
+                        <ul>
+                          <% if (cartProducts.length <=0) {%>
+                            <div>No products in your Cart</div>
+                            <%}else{%>
+                              <%for(let product of cartProducts){%>
+                                <li class="item"> <a href="/product-<%= product.productId._id %>"
+                                    title="Product Title Here" class="product-image"><img class="img-responsive"
+                                      src="/<%= product.productId.image%>" alt="<%= product.productId.title %>"></a>
+                                  <div class="product-details">
+                                    <div class="access">
+                                      <form action="/cart/delete/<%=product.productId._id%>" method="POST">
+                                        <button style="background-color: transparent;" type="submit"
+                                          class="jtv-btn-remove"><i class="fa fa-times"></i></button>
+                                      </form>
+                                    </div>
+                                    <strong>
+                                      <%= product.quantity %>
+                                    </strong> x <span class="price">
+                                      <%= product.productId.price %>
+                                    </span>
+                                    <p class="product-name"> <a href="shopping_cart.html">
+                                        <%= product.productId.title %>
+                                      </a> </p>
+                                  </div>
+                                </li>
+                                <%}%>
+                                  <%}%>
+
+
+                        </ul>
+
+                      </div>
+                    </div>
+
+
+
+
+                  </aside>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Main Container End -->
+
+          <!-- Brand Logo -->
+
+          <!-- Footer -->
+          <%- include('partials/footer.ejs') %>
+
+    </div>
+
+    <!-- End Footer -->
+
+    <%- include('partials/scripts.ejs') %>
+
+</body>
+
+</html>

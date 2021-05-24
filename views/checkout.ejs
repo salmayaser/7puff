@@ -1,0 +1,313 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('partials/head.ejs') %>
+
+</head>
+
+<body class="category-page">
+  <!-- mobile menu -->
+  <%- include('partials/mobile-menu.ejs') %>
+
+    <div id="page">
+      <!-- Header -->
+      <%- include('partials/header.ejs') %>
+
+        <!-- end header -->
+
+        <!-- Navigation -->
+
+        <%- include('partials/navbar.ejs') %>
+
+          <!-- end nav -->
+
+
+          <!-- main-container -->
+          <div class="main-container col1-layout">
+            <div class="main container">
+              <div class="row">
+                <section class="col-sm-12 col-xs-12">
+                  <div class="col-main">
+                    <div class="page-title">
+                      <h1>Checkout</h1>
+                    </div>
+                    <div class="page-content checkout-page">
+                      <form name="checkout" action="/checkout" method="POST">
+                        <h3 class="checkout-sep">2. Billing Infomations</h3>
+                        <div class="box-border">
+                          <ul>
+                            <li class="row">
+                              <div class="col-sm-6">
+                                <label for="first_name" class="required">First Name</label>
+                                <input type="text" class="input form-control" name="firstName" id="first_name" required>
+                              </div>
+                              <!--/ [col] -->
+                              <div class="col-sm-6">
+                                <label for="last_name" class="required">Last Name</label>
+                                <input type="text" name="lastName" class="input form-control" id="last_name" required>
+                              </div>
+                              <!--/ [col] -->
+                            </li>
+                            <!--/ .row -->
+                            <li class="row">
+                              <div class="col-xs-12">
+                                <label for="address" class="required">Address</label>
+                                <input type="text" class="input form-control" name="address" id="address" required>
+                              </div>
+
+                            </li>
+                            <!--/ .row -->
+                            <li class="row">
+                              <div class="col-sm-6">
+                                <label for="email_address" class="required">Email Address</label>
+                                <input type="text" class="input form-control" name="email" id="email_address" required>
+                              </div>
+
+                              <div class="col-sm-6">
+                                <label for="telephone" class="required">Telephone</label>
+                                <input class="input form-control" type="text" name="phone" id="telephone" required>
+                              </div>
+                              <!--/ [col] -->
+
+                            </li>
+                            <!-- / .row -->
+
+                            <li class="row">
+                              <div class="col-sm-6">
+                                <label for="city" class="required">state</label>
+                                <input class="input form-control" type="text" name="state" id="city" required>
+                              </div>
+                              <!--/ [col] -->
+
+                              <div class="col-sm-6">
+                                <label for="city" class="required">City</label>
+                                <input class="input form-control" type="text" name="city" id="city" required>
+                              </div>
+                              <!--/ [col] -->
+                            </li>
+                            <!--/ .row -->
+
+                            <li class="row">
+
+                              <!--/ [col] -->
+
+                              <div class="col-sm-12">
+                                <label class="required">Country</label>
+                                <select class="input form-control" name="country">
+                                  <%for(let country of countries){%>
+                                    <option value="<%=country.title%>">
+                                      <%=country.title%>
+                                    </option>
+
+                                    <%}%>
+                                </select>
+                              </div>
+                              <!--/ [col] -->
+                            </li>
+                            <!--/ .row -->
+
+                            <!--/ .row -->
+
+                          </ul>
+                        </div>
+
+
+
+                        <h3 class="checkout-sep">2. Order Review</h3>
+                        <div class="box-border">
+                          <div class="order-detail-content">
+                            <table class="table table-bordered table-responsive jtv-cart-summary">
+                              <thead>
+                                <tr>
+                                  <th class="cart_product">Product</th>
+                                  <th>Description</th>
+                                  <th>Avail.</th>
+                                  <th>Unit price</th>
+                                  <th>Quantity</th>
+                                  <th>Total</th>
+
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <% for(let product of products){ totalPrice +=product.productId.price *
+                                  product.quantity%>
+                                  <tr>
+                                    <td class="cart_product"><a href="/product-<%= product.productId._id %>"><img
+                                          class="img-responsive" src="/<%= product.productId.image%>"
+                                          alt="<%= product.productId.title %>"></a>
+                                    </td>
+                                    <td class="cart_description">
+                                      <p class="product-name"><a href="/product-<%= product.productId._id %>">
+                                          <%= product.productId.title %>
+                                        </a></p>
+
+                                    </td>
+                                    <td class="cart_avail"><span class="label label-success">In stock</span></td>
+                                    <td class="price"><span>
+                                        $ <%= product.productId.price %>
+                                      </span></td>
+                                    <td class="qty">
+                                      <%= product.quantity %>
+                                    </td>
+                                    <td class="price"><span>
+                                        $ <%= product.productId.price * product.quantity %>
+                                      </span></td>
+
+                                  </tr>
+                                  <% }%>
+
+                              </tbody>
+                              <tfoot>
+
+                                <tr>
+                                  <td colspan="5"><strong>Total</strong></td>
+                                  <td colspan="2"><strong>
+                                      $ <%=totalPrice%>
+                                        <input name="total" value="<%=totalPrice%>" hidden>
+                                    </strong></td>
+                                </tr>
+                              </tfoot>
+                            </table>
+
+                          </div>
+                        </div>
+                        <h3 class="checkout-sep">3. Payment Infomations</h3>
+                        <div class="box-border">
+                          <ul>
+                            <li class="row">
+                              <div class="col-sm-12">
+                                <label for="cardName" class="required">Name</label>
+                                <input type="text" class="input form-control" name="cardName" id="cardName" required>
+                              </div>
+                            </li>
+                            <!--/ .row -->
+                            <li class="row">
+                              <div class="col-xs-12">
+                                <label for="cardNumber" class="required">Card Number</label>
+                                <input type="number" class="input form-control" name="cardNumber" id="cardNumber"
+                                  required>
+                              </div>
+
+                            </li>
+                            <!--/ .row -->
+                            <li class="row">
+                              <div class="col-sm-6">
+                                <label for="expireDate" class="required">Expire Date (mm/yy)</label>
+                                <input type="month" class="input form-control" name="expireDate" id="expireDate"
+                                  required>
+                              </div>
+
+                              <div class="col-sm-6">
+                                <label for="cvv" class="required">CVV</label>
+                                <input class="input form-control" maxlength="3" name="cvv" id="cvv" required>
+                              </div>
+                              <!--/ [col] -->
+
+                            </li>
+                            <!-- / .row -->
+
+
+                          </ul>
+                        </div>
+
+                    </div>
+                  </div>
+                  <div class="cart_navigation">
+                    <button type="submit" class="button pull-right" id="order">Place an Order</button>
+                    </form>
+
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+          <!--End main-container -->
+
+          <!-- Brand Logo -->
+
+          <!-- Footer -->
+          <%- include('partials/footer.ejs') %>
+
+    </div>
+    <%- include('partials/scripts.ejs') %>
+      <script>
+        $(function () {
+
+          $("form[name='checkout']").validate({
+            // Specify validation rules
+            rules: {
+
+              firstName: "required",
+              lastName: "required",
+              address: "required",
+              city: "required",
+              state: "required",
+              country: "required",
+              cardName: "required",
+              expireDate: "required",
+              email: {
+                required: true,
+                email: true
+              },
+              cardNumber: {
+                required: true,
+                number: true,
+                minlength: 13
+              },
+              cvv: {
+                required: true,
+                number: true,
+                minlength: 3
+              },
+              phone: {
+                required: true,
+                number: true,
+                minlength: 5
+              },
+
+
+            },
+            // Specify validation error messages
+            messages: {
+              firstName: "<div class=' text-danger'>Please enter your firstname</div>",
+              lastName: "<div class=' text-danger'>Please enter your lastname</div>",
+              address: "<div class=' text-danger'>Please enter your address</div>",
+              city: "<div class=' text-danger'>Please enter your city</div>",
+              state: "<div class=' text-danger'>Please enter your state</div>",
+              country: "<div class=' text-danger'>Please enter your country</div>",
+              cardName: "<div class=' text-danger'>Please enter your country</div>",
+              expireDate: "<div class=' text-danger'>Please enter your country</div>",
+              phone: {
+                required: "<div class=' text-danger'>Please enter your phone number </div>",
+                number: "<div class=' text-danger'>please enter a valid phone number</div>",
+                minlength: "<div class=' text-danger'>please enter a valid phone number</div>",
+              },
+              cardNumber: {
+                required: "<div class=' text-danger'>Please enter your card number </div>",
+                number: "<div class=' text-danger'>please enter a valid card Number</div>",
+                minlength: "<div class=' text-danger'>please enter a valid card number</div>",
+              },
+              cvv: {
+                required: "<div class=' text-danger'>Please enter your cvv </div>",
+                number: "<div class=' text-danger'>please enter a valid cvv</div>",
+                minlength: "<div class=' text-danger'>please enter a valid cvv</div>",
+              },
+              email: "<div class='text-danger'>Please enter a valid email address</div>"
+            },
+            // Make sure the form is submitted to the destination defined
+            // in the "action" attribute of the form when valid
+            submitHandler: function (form) {
+              form.submit();
+            }
+          });
+        });
+      </script>
+
+      <!-- Adding Payment -->
+      <!-- End Footer -->
+
+
+</body>
+
+</html>

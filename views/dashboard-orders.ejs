@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("partials/dashboard-head.ejs") %>
+</head>
+
+<body>
+    <%- include("partials/dashboard-navbar.ejs") %>
+        <div class="container-fluid page-body-wrapper">
+            <!-- partial:partials/_sidebar.html -->
+            <%- include("partials/dashboard-sidebar.ejs") %>
+                <!-- partial -->
+                <div class="container mt-5">
+                    <h1>Orders</h1>
+                    <table class="table table-bordered jtv-cart-summary text-center">
+                        <thead>
+                            <tr>
+                                <th>customer Email</th>
+                                <th>customer Phone</th>
+                                <th>product code</th>
+                                <th>Total</th>
+                                <th>Shipping</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(let order of orders){ %>
+
+                                <tr>
+                                    <td>
+                                        <%=order.user.email%>
+                                    </td>
+                                    <td>
+                                        <%=order.user.phone%>
+                                    </td>
+                                    <% for(let product of order.products){ %>
+                                        <td>
+                                            <%=product.product.code%>
+                                        </td>
+                                        <td>
+                                            <%=product.product.price * product.quantity%>
+                                        </td>
+                                        <%}%>
+                                            <td>
+                                                <%=order.shipping.address+" ,"+order.shipping.city
+                                                    +", "+order.shipping.state+" ,"+order.shipping.country%>
+                                            </td>
+                                </tr>
+                                <%}%>
+                        </tbody>
+
+                    </table>
+
+                </div>
+                <!-- main-panel ends -->
+        </div>
+
+</body>
+
+</html>

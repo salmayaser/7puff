@@ -1,0 +1,78 @@
+<header>
+    <div class="header-container">
+        <div class="header-top">
+            <div class="container">
+                <div class="row">
+                    <!-- Header Language -->
+                    <div class="col-xs-12 col-sm-4 col-md-6">
+                        <div class="welcome-msg">Welcome to our store! </div>
+
+                    </div>
+                    <div class="col-xs-6 col-sm-8 col-md-6 hidden-xs">
+                        <!-- Header Top Links -->
+                        <div class="jtv-top-links">
+                            <div class="links">
+                                <ul>
+                                    <%if (isAuthenticated){%>
+                                        <li> <a title="My Account" href="/account"><span class="hidden-xs">My
+                                                    Account</span></a>
+                                        </li>
+
+                                        <li>
+                                            <a title="Checkout" href="/checkout"><span
+                                                    class="hidden-xs">Checkout</span></a>
+                                        </li>
+
+                                        <li>
+                                            <a title="cart" href="/cart"><span class=" hidden-xs">My
+                                                    Cart</span></a>
+                                        </li>
+                                        <li>
+                                            <form action="/logout" method="POST">
+                                                <button style="background-color: transparent; outline: none;"
+                                                    title="logout" type="submit">
+                                                    <span class="hidden-xs ">Log Out</span>
+                                                </button>
+
+                                            </form>
+
+                                        </li>
+                                        <%}%>
+                                            <%if (!isAuthenticated){%>
+                                                <li> <a href="/login"><span class="hidden-xs">Log In</span></a>
+                                                </li>
+                                                <li> <a href="/register"><span class="hidden-xs">Register</span></a>
+                                                </li>
+                                                <%}%>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- End Header Top Links -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                    <div class="jtv-top-cart-box">
+                        <!-- Top Cart -->
+                        <div class="mini-cart">
+                            <div class="basket dropdown-toggle">
+                                <a href="/cart"> <i class="pe-7s-cart"></i></a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-4 col-sm-4 col-xs-12 jtv-logo-box">
+                    <!-- Header Logo -->
+                    <div class="logo"> <a title="eCommerce" href="/"><img class="img-responsive" alt="eCommerce"
+                                src="images/logo.png"> </a> </div>
+                    <!-- End Header Logo -->
+                </div>
+              
+            </div>
+        </div>
+    </div>
+</header>

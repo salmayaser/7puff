@@ -1,0 +1,63 @@
+<!-- mobile menu -->
+<div id="jtv-mobile-menu">
+    <ul>
+        <li class="drop-menu"><a href="/" class="level-top active"><span>Home</span></a></li>
+        <li class="drop-menu"> <a href="#"> <span>Categories</span> </a>
+            <ul>
+                <!-- <li class="sub-cat"><a href="shop_grid.html"><span>Shop Grid</span></a>
+                    <ul>
+                        <li> <a href="shop_grid_right.html"> <span>Shop Grid Right Sidebar</span> </a> </li>
+                        <li> <a href="shop_grid_fullwidth.html"> <span>Shop Grid Fullwidth</span> </a> </li>
+                    </ul>
+                </li> -->
+                <% for(let category of categories){%>
+                    <li> <a href="/category<%=category._id%>" <span>
+                            <%= category.title%>
+                                </span>
+                        </a> </li>
+                    <%}%>
+            </ul>
+        </li>
+
+
+
+        <li class="mega-menu"> <a class="level-top" href="/about-us"><span>About Us</span></a> </li>
+        <li class="mega-menu"> <a class="level-top" href="/contact-us"><span>Contact Us</span></a> </li>
+
+    </ul>
+    <div class="jtv-top-link-mob">
+
+        <ul class="links">
+            <%if (isAuthenticated){%>
+                <li> <a title="My Account" href="/account"><span>My
+                            Account</span></a>
+                </li>
+
+                <li>
+                    <a title="Checkout" href="/checkout"><span>Checkout</span></a>
+                </li>
+
+                <li>
+                    <a title="cart" href="/cart"><span>My
+                            Cart</span></a>
+                </li>
+                <li>
+                    <form action="/logout" method="POST">
+                        <button style="background-color: transparent; outline: none;" title="logout" type="submit">
+                            <span>Log Out</span>
+                        </button>
+
+                    </form>
+
+                </li>
+                <%}%>
+                    <%if (!isAuthenticated){%>
+                        <li> <a href="/login"><span>Log In</span></a>
+                        </li>
+                        <li> <a href="/register"><span>Register</span></a>
+                        </li>
+                        <%}%>
+        </ul>
+
+    </div>
+</div>
